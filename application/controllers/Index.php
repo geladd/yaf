@@ -23,6 +23,13 @@ class IndexController extends Yaf_Controller_Abstract {
 		$this->getView()->assign("content", $model->selectSample());
 		$this->getView()->assign("name", $name);
 
+		//读取配置文件
+        $config = Yaf_Application::app()->getConfig();
+        //打印配置信息
+        echo '<pre>';
+        print_r($config);
+        echo '</pre>';
+
 		//4. render by Yaf, 如果这里返回FALSE, Yaf将不会调用自动视图引擎Render模板
         return TRUE;
 	}
