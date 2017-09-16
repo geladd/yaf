@@ -25,9 +25,14 @@ class IndexController extends Yaf_Controller_Abstract {
 
 		//读取配置文件
         $config = Yaf_Application::app()->getConfig();
+        $config1 = Yaf_Registry::get("config");
         //打印配置信息
         echo '<pre>';
-        print_r($config);
+        //print_r($config);
+        //print_r($config1);
+        echo $config['redis']['cache']['host'].'<br>';
+        echo $config1['redis']['cache']['port'].'<br>';
+        echo $config->db->type;
         echo '</pre>';
 
 		//4. render by Yaf, 如果这里返回FALSE, Yaf将不会调用自动视图引擎Render模板
@@ -41,7 +46,14 @@ class IndexController extends Yaf_Controller_Abstract {
 		return TRUE;
 	}
 
-	public function test1Action() {
-		return TRUE;
-	}
+	public function mydbAction()
+    {
+        $config = Yaf_Application::app()->getConfig()->db;
+        $db = Db_MySql::getInstance($config);
+        /*$row = $db->fetchOne('select count(*) from `shop`');
+        print_r($row);die;*/
+        $rows = $db->fetchAll('select * from `shop`');
+        $this->getView()->assign("rows", $rows);
+        return TRUE;
+    }
 }
