@@ -1,0 +1,32 @@
+<?php
+require_once(APPLICATION_PATH.'/public/block/error/header.html');
+?>
+
+<div style="margin:0 auto;text-align:center;">
+
+<form method="post" >
+<input type="text" name="username" class="uname">
+<input type="password" name="password" class="pwd">
+<input type="button" value="登录" class="btn">
+<span class="msg"></span>
+</form>
+
+</div>
+
+
+<!-- jQuery 3 -->
+<script src="/public/bower_components/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$('.btn').click(function() {
+			alert('adfasdf');
+			$.post('/index.php/Admin/Login/login', {uname:$('.uname').val(), pwd:$('.pwd').val()}, function(res) {
+				console.log(res);
+			}, 'json');
+		});
+	});
+</script>
+
+<?php
+require_once(APPLICATION_PATH.'/public/block/error/footer.html');
+?>

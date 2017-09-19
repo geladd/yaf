@@ -11,10 +11,22 @@ class IndexController extends Yaf_Controller_Abstract {
      * 默认动作
      */
 	public function indexAction() {
-		/*$config = Yaf_Application::app()->getConfig()->db;
-        $db = Db_MySql::getInstance($config);
-        $rows = $db->fetchAll('select * from `shop`');
-        $this->getView()->assign("rows", $rows);*/
-        return TRUE;
+        $model = new PassportModel();
+        $check = $model->isOnline();
+        if(!$ckeck['status']) {
+            echo $check['msg'];
+            return false;
+        } else {
+            return true;
+        }
 	}
+
+    public function getcAction() {
+        $model = new PassportModel();
+        $check = $model->isOnline();
+        if(!$ckeck['status']) {
+            $this->getView()->assign("msg",$check['msg']);
+        }
+        return true;
+    }
 }
