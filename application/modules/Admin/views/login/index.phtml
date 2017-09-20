@@ -23,10 +23,10 @@ require_once(APPLICATION_PATH.'/public/block/error/header.html');
 				$('.msg').html(res);
 				if(res.status == 'ok') {
 					if(res.msg) {
-						setTimeout("window.location.href = '/index.php/Admin/index/index';", 800);
+						setTimeout("window.location.href = '/Admin/index/index';", 800);
 						$('.msg').html(res.msg);
 					} else {
-						setTimeout("window.location.href = '/index.php/Admin/index/index';", 2000);
+						setTimeout("window.location.href = '/Admin/index/index';", 2000);
 						$('.msg').html('登录中...');
 					}
 				} else {
