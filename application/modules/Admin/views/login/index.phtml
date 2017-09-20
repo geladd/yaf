@@ -19,14 +19,14 @@ require_once(APPLICATION_PATH.'/public/block/error/header.html');
 <script type="text/javascript">
 	$(function() {
 		$('.btn').click(function() {
-			$.post('/index.php/Admin/Login/login', {uname:$('.uname').val(), pwd:$('.pwd').val()}, function(res) {
+			$.post('/Admin/Login/login', {uname:$('.uname').val(), pwd:$('.pwd').val()}, function(res) {
 				$('.msg').html(res);
 				if(res.status == 'ok') {
 					if(res.msg) {
-						setTimeout("window.location.href = '/index.php/Admin/index/index';", 800);
+						setTimeout("window.location.href = '/Admin/index/index';", 800);
 						$('.msg').html(res.msg);
 					} else {
-						setTimeout("window.location.href = '/index.php/Admin/index/index';", 2000);
+						setTimeout("window.location.href = '/Admin/index/index';", 2000);
 						$('.msg').html('登录中...');
 					}
 				} else {

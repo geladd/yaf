@@ -35,7 +35,7 @@ class PassportModel {
 		if($result['status']) {
 			return $result;
 		} else {
-			header("location:/index.php/Admin/Error/index");
+			header("location:/Admin/Error/index");
 		}
     }
 
@@ -45,7 +45,7 @@ class PassportModel {
     public function isOnlineError() {
     	$result = array();
     	$result['status'] = false;
-    	$result['redirect'] = '/index.php/Admin/Login/index';
+    	$result['redirect'] = '/Admin/Login/index';
 		$login = $this->db->fetchRow("SELECT prefix, `value`, dateline, ttl FROM sdb_kvstore WHERE `key`='".$_COOKIE['UNAME']."'");
 		if($login['prefix'] == 'login') {
 			$current_date = time();
@@ -54,7 +54,7 @@ class PassportModel {
 				$info = $this->db->fetchRow("SELECT username, password FROM sdb_admin WHERE username='".$userinfo['username']."'");
 				if($info['username']) {
 					if($info['password'] != $userinfo['password'] ) {
-				        $result['msg'] = '登录密码错误，<a href="/index.php/Admin/Login/index">点击重新登录</a>';
+				        $result['msg'] = '登录密码错误，<a href="/Admin/Login/index">点击重新登录</a>';
 				        $result['status'] = false;
 					} else {
 						$result['username'] = $userinfo['username'];
@@ -62,15 +62,15 @@ class PassportModel {
 						$result['status'] = true;
 					}
 				} else {
-	        		$result['msg'] = '登录用户名不存在，<a href="/index.php/Admin/Login/index">点击重新登录</a>';
+	        		$result['msg'] = '登录用户名不存在，<a href="/Admin/Login/index">点击重新登录</a>';
 				    $result['status'] = false;
 				}
 			} else {
-	      		$result['msg'] = '登录已过期，<a href="/index.php/Admin/Login/index">点击重新登录</a>';
+	      		$result['msg'] = '登录已过期，<a href="/Admin/Login/index">点击重新登录</a>';
 				$result['status'] = false;
 			}
 		} else {
-	    	$result['msg'] = '登录信息异常，<a href="/index.php/Admin/Login/index">点击重新登录</a>';
+	    	$result['msg'] = '登录信息异常，<a href="/Admin/Login/index">点击重新登录</a>';
 			$result['status'] = false;
 		}
 		return $result;
