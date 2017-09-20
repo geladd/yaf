@@ -4,7 +4,7 @@ require_once(APPLICATION_PATH.'/public/block/error/header.html');
 
 <div style="margin:0 auto;text-align:center;">
 
-<form method="post" >
+<form method="post">
 <input type="text" name="username" class="uname">
 <input type="password" name="password" class="pwd">
 <input type="button" value="登录" class="btn">
@@ -22,12 +22,23 @@ require_once(APPLICATION_PATH.'/public/block/error/header.html');
 			$.post('/index.php/Admin/Login/login', {uname:$('.uname').val(), pwd:$('.pwd').val()}, function(res) {
 				$('.msg').html(res);
 				if(res.status == 'ok') {
-					window.location.href = '/index.php/Admin/index/index';
+					if(res.msg) {
+						setTimeout("window.location.href = '/index.php/Admin/index/index';", 800);
+						$('.msg').html(res.msg);
+					} else {
+						setTimeout("window.location.href = '/index.php/Admin/index/index';", 2000);
+						$('.msg').html('登录中...');
+					}
 				} else {
 					$('.msg').html(res.msg);
 				}
 			}, 'json');
 		});
+		$("body").keydown(function() {
+             if (event.keyCode == "13") {
+                 $('.btn').click();
+             }
+         });
 	});
 </script>
 

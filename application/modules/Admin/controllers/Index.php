@@ -13,12 +13,8 @@ class IndexController extends Yaf_Controller_Abstract {
 	public function indexAction() {
         $model = new PassportModel();
         $check = $model->isOnline();
-        if(!$ckeck['status']) {
-            echo $check['msg'];
-            return false;
-        } else {
-            return true;
-        }
+        $this->getView()->assign("login_username", $check['username']);
+        return true;
 	}
 
     public function getcAction() {

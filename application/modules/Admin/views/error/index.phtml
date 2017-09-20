@@ -1,0 +1,13 @@
+<?php
+require_once(APPLICATION_PATH.'/public/block/error/header.html');
+?>
+<div style="margin:0 auto;text-align:center;">
+	<?php echo $result['msg'];?>
+</div>
+<script type="text/javascript">
+	setTimeout("window.location.href = '<?php echo $result[redirect];?>';", 2000);
+</script>
+
+<?php
+require_once(APPLICATION_PATH.'/public/block/error/footer.html');
+?>
