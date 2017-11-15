@@ -46,33 +46,38 @@ class PassportModel {
     	$result = array();
     	$result['status'] = false;
     	$result['redirect'] = '/Admin/Login/index';
-		$login = $this->db->fetchRow("SELECT prefix, `value`, dateline, ttl FROM sdb_kvstore WHERE `key`='".$_COOKIE['UNAME']."'");
-		if($login['prefix'] == 'login') {
-			$current_date = time();
-			if($current_date >= $login['dateline'] && $current_date <= $login['ttl']) {
-				$userinfo = unserialize($login['value']);
-				$info = $this->db->fetchRow("SELECT username, password FROM sdb_admin WHERE username='".$userinfo['username']."'");
-				if($info['username']) {
-					if($info['password'] != $userinfo['password'] ) {
-				        $result['msg'] = '登录密码错误，<a href="/Admin/Login/index">点击重新登录</a>';
-				        $result['status'] = false;
+    	if(isset($_COOKIE['UNAME'])) {
+			$login = $this->db->fetchRow("SELECT prefix, `value`, dateline, ttl FROM sdb_kvstore WHERE `key`='".$_COOKIE['UNAME']."'");
+			if($login['prefix'] == 'login') {
+				$current_date = time();
+				if($current_date >= $login['dateline'] && $current_date <= $login['ttl']) {
+					$userinfo = unserialize($login['value']);
+					$info = $this->db->fetchRow("SELECT username, password FROM sdb_admin WHERE username='".$userinfo['username']."'");
+					if($info['username']) {
+						if($info['password'] != $userinfo['password'] ) {
+					        $result['msg'] = '登录密码错误，<a href="/Admin/Login/index">点击重新登录</a>';
+					        $result['status'] = false;
+						} else {
+							$result['username'] = $userinfo['username'];
+							$result['redirect'] = '/Admin/Index/index';
+							$result['status'] = true;
+						}
 					} else {
-						$result['username'] = $userinfo['username'];
-						$result['redirect'] = '/Admin/Index/index';
-						$result['status'] = true;
+		        		$result['msg'] = '登录用户名不存在，<a href="/Admin/Login/index">点击重新登录</a>';
+					    $result['status'] = false;
 					}
 				} else {
-	        		$result['msg'] = '登录用户名不存在，<a href="/Admin/Login/index">点击重新登录</a>';
-				    $result['status'] = false;
+		      		$result['msg'] = '登录已过期，<a href="/Admin/Login/index">点击重新登录</a>';
+					$result['status'] = false;
 				}
 			} else {
-	      		$result['msg'] = '登录已过期，<a href="/Admin/Login/index">点击重新登录</a>';
+		    	$result['msg'] = '登录信息异常，<a href="/Admin/Login/index">点击重新登录</a>';
 				$result['status'] = false;
 			}
-		} else {
-	    	$result['msg'] = '登录信息异常，<a href="/Admin/Login/index">点击重新登录</a>';
+    	} else {
+    		$result['msg'] = '登录信息异常，<a href="/Admin/Login/index">点击重新登录</a>';
 			$result['status'] = false;
-		}
+    	}
 		return $result;
     }
 
