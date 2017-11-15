@@ -30,9 +30,9 @@ class IndexController extends Yaf_Controller_Abstract {
         echo '<pre>';
         //print_r($config);
         //print_r($config1);
-        echo $config['redis']['cache']['host'].'<br>';
+        /*echo $config['redis']['cache']['host'].'<br>';
         echo $config1['redis']['cache']['port'].'<br>';
-        echo $config->db->type;
+        echo $config->db->type;*/
         echo '</pre>';
 
 		//4. render by Yaf, 如果这里返回FALSE, Yaf将不会调用自动视图引擎Render模板
