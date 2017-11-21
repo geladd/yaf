@@ -27,7 +27,7 @@ class DaotModel {
         if($orderby)  $sql_order = ' ORDER BY ' . (is_array($orderby) ? implode($orderby,' ') : $orderby);
         if($filter && is_array($filter)) {
             $where = $this->filter2sql($filter);
-            $where = $where ? ' WHERE '.$where : '';
+            $where = ' WHERE '.$where;
         } else {
             $where = '';
         }
