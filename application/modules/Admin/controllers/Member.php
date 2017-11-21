@@ -1,11 +1,11 @@
 <?php
 /**
  * @name IndexController
- * @author root
- * @desc 后台默认控制器
+ * @author geladd
+ * @desc 会员控制器
  * @see http://www.php.net/manual/en/class.yaf-controller-abstract.php
  */
-class IndexController extends Yaf_Controller_Abstract {
+class MemberController extends Yaf_Controller_Abstract {
     private $db;
     private $isOnline;
     
@@ -23,6 +23,9 @@ class IndexController extends Yaf_Controller_Abstract {
      */
 	public function indexAction() {
 	    $this->getView()->assign("login_username", $this->isOnline['username']);
+	    $total = $this->db->fetchOne('SELECT count(id) AS c FROM sdb_member_bind_tag');
+	    $data = $this->db->fetchAll();
+	    Pagination::splite($total, 6, 3, 'http://localhost:8157/Admin/index/index?', $this->getView());
         return true;
 	}
 

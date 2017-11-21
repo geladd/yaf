@@ -1,0 +1,26 @@
+
+#page {
+	text-align:center;
+	padding:10px;
+}
+#page a {
+	border:1px solid #3c8dbc;
+	padding:2px 5px;
+	margin:0 2px;
+}
+#page a:hover,#page span.me {
+	color:#ffffff;
+	border:1px solid #3c8dbc;
+	background:#3c8dbc;
+	text-decoration:none;
+}
+#page span.disabled {
+	border:1px solid #ccc;
+	padding:2px 5px;
+	margin:0 2px;
+	color:#cccccc;
+}
+#page span.me {
+	padding:2px 5px;
+	margin:0 2px;
+}
